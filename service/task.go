@@ -18,7 +18,7 @@ func TaskList(ctx *gin.Context) {
 	}
 
 	// Get tasks in DB
-	var tasks []database.Task
+	var tasks []database.Task                      //型はdatabase.Taskのスライス
 	err = db.Select(&tasks, "SELECT * FROM tasks") // Use DB#Select for multiple entries
 	if err != nil {
 		Error(http.StatusInternalServerError, err.Error())(ctx)
@@ -39,6 +39,7 @@ func ShowTask(ctx *gin.Context) {
 	}
 
 	// parse ID given as a parameter
+	//Ginのメソッド.Paramによりパスからしてのパラメータの値を取得する
 	id, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
 		Error(http.StatusBadRequest, err.Error())(ctx)
@@ -46,6 +47,7 @@ func ShowTask(ctx *gin.Context) {
 	}
 
 	// Get a task with given ID
+	//パラメータから取得したIDの値をもとにデータベースからタスクを抽出する
 	var task database.Task
 	err = db.Get(&task, "SELECT * FROM tasks WHERE id=?", id) // Use DB#Get for one entry
 	if err != nil {
@@ -54,5 +56,5 @@ func ShowTask(ctx *gin.Context) {
 	}
 
 	// Render task
-	ctx.String(http.StatusOK, task.Title)  // Modify it!!
+	ctx.HTML(http.StatusOK, "task_info.html", task)
 }
