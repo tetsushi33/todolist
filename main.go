@@ -38,9 +38,15 @@ func main() {
 
 	// routing
 	engine.Static("/assets", "./assets")
+	//初期画面
 	engine.GET("/", service.Home)
+	//タスクの一覧画面
 	engine.GET("/list", service.TaskList)
+	//タスクの個別の情報表示画面
 	engine.GET("/task/:id", service.ShowTask) // ":id"はパラメータ記法
+	//タスクの新規登録画面
+	engine.GET("task/new", service.NewTaskForm)
+	engine.POST("task/new", service.RegisterTask)
 
 	// start server
 	engine.Run(fmt.Sprintf(":%d", port))

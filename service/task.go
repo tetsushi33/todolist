@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -57,4 +58,46 @@ func ShowTask(ctx *gin.Context) {
 
 	// Render task
 	ctx.HTML(http.StatusOK, "task_info.html", task)
+}
+
+// タスクの新規登録
+// GET
+func NewTaskForm(ctx *gin.Context) {
+	ctx.HTML(http.StatusOK, "form_newTask.html", gin.H{"Title": "新規タスクの登録"})
+}
+
+// POST
+func RegisterTask(ctx *gin.Context) {
+	//POSTに送られているデータからtitleとmessageを取得
+	title, exist := ctx.GetPostForm("title")
+	if !exist {
+		Error(http.StatusBadRequest, "No title is given")(ctx)
+		return
+	}
+	message, exist := ctx.GetPostForm("message")
+	if !exist {
+		Error(http.StatusBadRequest, "No message is given")(ctx)
+		return
+	}
+
+	// Get DB connection
+	db, err := database.GetConnection()
+	if err != nil {
+		Error(http.StatusInternalServerError, err.Error())(ctx)
+		return
+	}
+
+	//DBに追加データを挿入する
+	result, err := db.Exec("INSERT INTO tasks (title, message) VALUES (?, ?)", title, message)
+	if err != nil {
+		Error(http.StatusInternalServerError, err.Error())(ctx)
+		return
+	}
+
+	//ページの遷移先の決定(リダイレクト)
+	path := "/list" // デフォルトではタスク一覧ページへ戻る
+	if id, err := result.LastInsertId(); err == nil {
+		path = fmt.Sprintf("/task/%d", id) // 正常にIDを取得できた場合は /task/<id> へ戻る
+	}
+	ctx.Redirect(http.StatusFound, path)
 }

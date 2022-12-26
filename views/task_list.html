@@ -1,7 +1,8 @@
 <!--タスクの一覧表示のページ-->
 
 {{ template "header" . }}
-<h1>List of tasks</h1>
+<h1>タスク一覧</h1>
+<p><a href="/task/new">新規登録</a></p>
 {{ if not .Tasks }}
 <p>登録データがありません．</p>
 {{ else }}
