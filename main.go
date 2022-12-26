@@ -47,6 +47,9 @@ func main() {
 	//タスクの新規登録画面
 	engine.GET("task/new", service.NewTaskForm)
 	engine.POST("task/new", service.RegisterTask)
+	//タスクの編集画面
+	engine.GET("task/edit/:id", service.EditTaskForm)
+	engine.POST("task/edit/:id", service.UpdateTask)
 
 	// start server
 	engine.Run(fmt.Sprintf(":%d", port))
