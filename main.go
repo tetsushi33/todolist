@@ -50,6 +50,8 @@ func main() {
 	//タスクの編集画面
 	engine.GET("task/edit/:id", service.EditTaskForm)
 	engine.POST("task/edit/:id", service.UpdateTask)
+	//タスクの削除
+	engine.GET("/task/delete/:id", service.DeleteTask)
 
 	// start server
 	engine.Run(fmt.Sprintf(":%d", port))
