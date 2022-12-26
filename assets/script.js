@@ -6,7 +6,9 @@ const confirm_delete = (id) => {
 }
  
 const confirm_update = (id) => {
-    if(window.confirm(`Task ${id} を編集しますか？`)) {
+    if(window.confirm(`Task ${id} の変更を登録しますか？`)) {
         location.href = `/task/edit/${id}`;
+    }else{
+        return false;
     }
 }

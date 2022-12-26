@@ -1,5 +1,5 @@
-INSERT INTO `tasks` (`title`) VALUES ("sample-task-01");
-INSERT INTO `tasks` (`title`) VALUES ("sample-task-02");
-INSERT INTO `tasks` (`title`, `message`) VALUES ("sample-task-03", "コメントもできるよ");
-INSERT INTO `tasks` (`title`) VALUES ("sample-task-04");
-INSERT INTO `tasks` (`title`, `is_done`) VALUES ("sample-task-05", true);
+INSERT INTO `tasks` (`title`) VALUES ("課題01");
+INSERT INTO `tasks` (`title`) VALUES ("課題02");
+INSERT INTO `tasks` (`title`, `message`) VALUES ("課題03", "コメントもできるよ");
+INSERT INTO `tasks` (`title`) VALUES ("課題04");
+INSERT INTO `tasks` (`title`, `is_done`) VALUES ("課題05", true);

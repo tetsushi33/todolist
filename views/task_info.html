@@ -1,18 +1,14 @@
 {{ template "header" . }}
 <h1>Task: {{ .Title }}</h1>
-<dl>
-    <dt>ID</dt>
-    <dd>{{ .ID }}</dd>
-    <dt>登録日</dt>
-    <dd>{{ .CreatedAt }}</dd>
-    <dt>状態</dt>
-    <dd><input type="checkbox" {{ if .IsDone }}checked {{ end }}disabled/>済</dd>
-    <dt>メッセージ</dt>
-    <dd>{{ .Message }}</dd>
+<ul>
+    <li>ID: {{ .ID }}</li>
+    <li>登録日:  {{ .CreatedAt }}</li>
+    <li>状態:   <input type="checkbox" {{ if .IsDone }}checked {{ end }}disabled/>済</li>
+    <li>コメント: {{ .Message }}</li>
+</ul>
 
-</dl>
 <a href="/list"><button type="button">リストへ戻る</button></a>
-<button type="button" onclick="confirm_update({{ .ID }})">編集</button>
+<a href="/task/edit/{{ .ID }}"><button type="button">編集</button></a>
 <button type="button" onclick="confirm_delete({{ .ID }})">削除</button>
 
 {{ template "footer" }}
