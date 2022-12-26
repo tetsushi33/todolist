@@ -4,7 +4,6 @@
 <header class="leftNavigation">
     <p>ユーザー情報</p>
     <p>登録タスク一覧</p>
-    <p><a href="/task/new">新規登録</a></p>
 </header>
 
 <div class="content">
@@ -20,7 +19,7 @@
         </tr>
     {{ range $task := .Tasks }}
         <tr>
-            <td><a href="/task/{{ $task.ID }}">{{ $task.ID }}</a></td>
+            <td><a href="/task/{{ $task.ID }}" class="btn btn--circle btn--circle-c btn--shadow"><i class="fas fa-arrow-up"></i>{{ $task.ID }}</a></td>
             <td>{{ $task.Title }}</td>
             <td>{{ $task.CreatedAt }}</td>
             <td>{{ if $task.IsDone }}済{{ end }}</td>
@@ -28,10 +27,23 @@
     {{ end }}
     </table>
     {{ end }}
+    <a href="/task/new" class="btn btn--orange btn--radius">+ 追加</a>
 </div>
 
 <div class="rightNavigation">
     <p>絞り込み検索</p>
+    <form action="/list" method="GET" class="search_container">
+        <p><input type="text" name="kw" value="{{ .Kw }}" placeholder="キーワード検索"></p>
+        <p>状態: 
+            <input type="radio" name="is_done" value="" {{ if eq .Is_done "" }}checked{{ end }}><label>選択なし</label>
+            <br>
+            <input type="radio" name="is_done" value="t" {{ if eq .Is_done "t" }}checked{{ end }}><label>完了</label>
+            <br>
+            <input type="radio" name="is_done" value="f" {{ if eq .Is_done "f" }}checked{{ end }}><label>未完了</label>
+        </p>
+        
+        <input type="submit" value="検索">
+    </form>
 </div>
 
 </div>

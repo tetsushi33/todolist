@@ -18,16 +18,29 @@ func TaskList(ctx *gin.Context) {
 		return
 	}
 
+	//パラメータから検索クエリを取得
+	kw := ctx.Query("kw")
+	is_done := ctx.Query("is_done")
+
 	// Get tasks in DB
-	var tasks []database.Task                      //型はdatabase.Taskのスライス
-	err = db.Select(&tasks, "SELECT * FROM tasks") // Use DB#Select for multiple entries
+	var tasks []database.Task //型はdatabase.Taskのスライス
+	switch {
+	case is_done == "":
+		err = db.Select(&tasks, "SELECT * FROM tasks WHERE title LIKE ?", "%"+kw+"%")
+	case is_done != "":
+		is_done_bool, _ := strconv.ParseBool(is_done)
+		err = db.Select(&tasks, "SELECT * FROM tasks WHERE title LIKE ? AND is_done LIKE ?", "%"+kw+"%", is_done_bool)
+	default:
+		err = db.Select(&tasks, "SELECT * FROM tasks")
+	}
+
 	if err != nil {
 		Error(http.StatusInternalServerError, err.Error())(ctx)
 		return
 	}
 
 	// Render tasks
-	ctx.HTML(http.StatusOK, "task_list.html", gin.H{"Title": "Task list", "Tasks": tasks})
+	ctx.HTML(http.StatusOK, "task_list.html", gin.H{"Title": "Task list", "Tasks": tasks, "Kw": kw, "Is_done": is_done})
 }
 
 // ShowTask renders a task with given ID

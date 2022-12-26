@@ -8,14 +8,17 @@
 .leftNavigation{
     flex: 1;
     text-align: center;
-    background-color: rgb(239, 171, 241);
-    color: black;
+    background-color: rgb(56, 56, 56);
+    color: white;
 }
 .rightNavigation{
-    flex: 1;
     text-align: center;
-    background-color: rgb(175, 173, 173);
-    color: black;
+    padding: 0.5em 0.5em;
+    margin: 0em 0.5em;
+    color: #364e96;
+    background: #ffffff;/*背景色*/
+    border-top: solid 6px #364e96;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);/*影*/
 }
 .content{
     flex: 2;
@@ -53,13 +56,133 @@ h1 {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
+    box-shadow: 0 0 15px -6px #00000073;
   }
   
-  table th,table td{
-    padding: 10px 0;
+  table tr{
+    background-color: #fff;
+  }
+  
+  table tr:last-child *{
+    border-bottom: none;
+  }
+  
+table th {
     text-align: center;
+    background-color: #364e96;
+    color: white;
+    padding: 10px 0;
+}
+
+  table td{
+    text-align: center;
+    border-bottom: 1px solid rgb(187, 187, 187);
+    color: black;
+    padding: 10px 0;
+  }
+
+  table tr:hover{
+    background-color: #d4faff;
+  }
+
+
+/*ボタン*/
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+
+.btn,
+a.btn,
+button.btn {
+  font-size: 1rem;
+  font-weight: 100;
+  line-height: 0.5;
+  position: relative;
+  display: inline-block;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #212529;
+  border-radius: 0.5rem;
+}
+
+/*1. 追加ボタン*/
+.btn--orange,
+a.btn--orange {
+  color: black;
+  background-color: rgb(112, 153, 243);
+}
+.btn--orange:hover,
+a.btn--orange:hover {
+  color: black;
+  background: #7fa6ee;
+}
+
+a.btn--radius {
+   border-radius: 100vh;
+}
+
+/*2. IDボタン*/
+a.btn--circle {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: #366b96;
+    color: white;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
   }
   
-  table tr:nth-child(odd){
-    background-color: #eee
+  a.btn--circle i {
+    font-size: 100%;
+    line-height: 50px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    letter-spacing: 0;
   }
+  a.btn--circle:hover i {
+    line-height: 40px;
+    background: #526dbd;
+  }
+
+/*絞り込み*/
+.search_container input[type="text"]{
+  border: 1px solid #999;
+  padding: 3px 10px;
+  border-radius: 3px;
+  height: 2.2em;
+  overflow: hidden;
+}
+.search_container input[type="text"]:focus {
+  outline: 0;
+  height: 2.0em;
+}
+.search_container input[type="submit"]{
+  cursor: pointer;
+  font-size: 0.9em;
+  border: none;
+  border: 1px solid #1dc1d6;
+  border-radius: 30px;
+  outline : none;
+  width: 3em;
+  height: 3em;
+  display: inline-block;
+  color: white;
+  background-color: #364e96;
+}
+
